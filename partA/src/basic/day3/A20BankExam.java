@@ -47,6 +47,5 @@ public class A20BankExam {
                     break;
             }
         }
-        git config --global user.name
     }
 }
