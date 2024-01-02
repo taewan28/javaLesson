@@ -55,3 +55,27 @@
 
 
 ![Alt text](images/22.png)
+
+
+
+    ### 순서
+    1) git init
+    2) git remote add origin
+    3) git config --global user.email
+    4) git config --global user.name
+
+    반복되는 작업은
+    1) vs code : Staged Changes 로 커밋할 파일 선택하기
+    2) vs code : commit 하기. 메시지 꼭 작성하기
+    3) vs code : 메뉴에서 push . github으로 소스 전송 확인하세요.
+
+    집에 가서 한번만 할것
+    1) git clone 원격주소
+    2) git config --global user.email
+    3) git config --global user.name
+    4) clone으로 생긴 프로젝트를 vs code에서 열기
+
+    집에가서 반복할 작업은
+    1) vs code : 메뉴에서 pull. github에 있는 소스를 받아오기.
+    (동기화)
+    2) 새로 작성한 연습 코드 소스 파일은 stage - commit - push 
