@@ -60,6 +60,12 @@ public class A11StringMethod {
     //String : toUpperCase, toLowerCase, concat, substring, replace
     //int : length, indexOf
     //char : charAt
+
+    // 24-01-02 복습
+    // * 입력 -> 처리 => 출력 의 과정을 항상 생각하자.
+    // * 문자열 메소드에도 입력,출력을 생각해 볼수 있습니다. 입력은 메소드의 인자, 출력은 메소드의 리턴
+    //      단,  message.charAt(1) 를 예시로 하면 message는 메소드의 실행 주체(주인).
+    //  그리고, 리턴이 없는 메소드가 있을 수 있으면 그 떄는 void 로 표현됩니다.
     }
 }
 
