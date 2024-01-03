@@ -27,6 +27,7 @@ package basic.day1;
         // age += 7;
 
         isAdult = myage >=20;            //실행(연산)순서 : >=를 실행한 후에 =(대입) 실행
+        
 
         grade = 'B';
     }
