@@ -51,7 +51,7 @@ public class A11StringMethod {
 
     //질문에 공유
     // 1) 메소드의 리턴ㅌ입에 따라 결과를 저장할 변수를 일치하는 형식으로 선언하기
-    string temp = message.toUpperCase().substring(3, 5);
+    String temp = message.toUpperCase().substring(3, 5);
     // 2) 문자열리턴값으로 또 메소드 실행할수 있음
     System.out.println("message.toUpperCase().substring(3,5) : " +message.toUpperCase().substring(3,5));
     
