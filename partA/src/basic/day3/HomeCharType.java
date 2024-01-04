@@ -19,7 +19,8 @@ public class HomeCharType {
             else if (tae>96 && tae<123) lowerCount++;
             else if (tae>48 && tae<58) numberCount++;
             else if (tae>31 && tae<48) symbolCount++;
-            else if (tae>57 && tae<64) symbolCount++;
+            else if (tae>57 && tae<65) symbolCount++;
+            else if (tae>90 && tae<97) symbolCount++;
             else if (tae>122 && tae<128) symbolCount++;
         }
         System.out.println("문자 종류 : 대문자 " +upperCount+"개, 소문자 " +lowerCount+"개, 숫자 "+numberCount+"개, 기호 "+symbolCount+"개");  
