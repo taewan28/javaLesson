@@ -10,6 +10,7 @@ public class Score {
     private int[] jumsues;      //점수들이 저장될 배열
                                 // 배열의 크기는 학년마다 다를 수 있음.
 
+    //인스턴스 메소드 : 인스턴스 필드를 사용하는 처리를 합니다. 단축키 TAP
     //getter
     public String getname(){
         return name;
@@ -53,6 +54,11 @@ public class Score {
         }
         return average / s.length;
     }
+    //평균
+    //public double average(){
+    //    return (double)sum()/jumsues.length;
+    //}
+    
     public void printData(){
         System.out.println("학생 이름 = " + name + ", 학년 = " + grade +", 점수 = "+Arrays.toString(jumsues));
         System.out.println();
