@@ -35,9 +35,7 @@ public class AddQuiz {
     }
 
     public boolean isRight(){
-        boolean result = false;
-        if (data1+data2 == userAnswer) result=true;
-        return result;
+        return(data1+data2 == userAnswer);
     }
 }
 

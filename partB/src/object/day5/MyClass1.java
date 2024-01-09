@@ -9,8 +9,8 @@ public class MyClass1 {
 	String field1;
 	int field2;
 	
-//배열은 참조타입이므로 참조타입 field3변수만 선언한 상태입니다.
-//배열도 객체입니다. 아직 객체는 생성이 안됬습니다.
+	//배열은 참조타입이므로 참조타입 field3변수만 선언한 상태입니다.
+	//배열도 객체입니다. 아직 객체는 생성이 안됬습니다.
 	double[] field3;   
 	//초기값은 null
 	

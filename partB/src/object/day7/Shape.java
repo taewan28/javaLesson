@@ -24,7 +24,7 @@ public class Shape {
 		
 		//접근한정자 테스트 할 필드
 		protected String etc;
-		int round;
+		int round;						//접근한정자 없는 경우
 		public double border;
 		
 		public Shape(){
@@ -73,6 +73,11 @@ public class Shape {
 					+height + ",면적:" + calculateArea());
 		}
 		
+		//day 8: Object 클래스의 toString 메소드를 오버라이드
+		@Override
+		public String toString() {
+			return "Shape [도형이름=" + shapeName + ", 너비=" + width + ", 높이=" + height + "][면적=" + calculateArea()+"]";
+		}
 }
 
 
