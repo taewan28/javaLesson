@@ -1,0 +1,44 @@
+1.setter 가 없다면 초기값이 설정된 후 모든 필드값을 변경할 수 없는 객체를 무엇이라 할까요?
+==> 불변 객체
+
+2.String, String[],int[] 필드값을 출력시 기본적으로 출력되는 코드를 작성하시오.
+정답: null
+
+3. private할때 다른 클래스에서 접근하려면 해당 클래스 안의 메서드를 통해서만 가능하다고 한다. 
+   그 관리하는 메서드를 무엇이라 하는가?(정답 2개)
+
+정답 : setter / getter
+
+4. String format 지정자 중 출력 결과가 알맞지 않은것은?
+1) %s = "hello"
+2) %d =  123
+3) %b =  3.14
+4) %c =  'A'
+
+정답 : 3번 %b는 true 또는 false가 출력되야한다.
+
+
+5. 아래의 출력문과 같이 출력을 원할때 오류코드와 수정코드를 작성하십시오.
+        
+        (출력문)
+        구매할 상품 번호를 선택하세요. 선택 종료는 -1 입니다.
+        상품번호 입력 >>>7
+        없는 상품입니다. 상품을 더 담아주세요~~
+        상품번호 입력 >>>
+        
+        <코드>
+        System.out.println("구매할 상품 번호를 선택하세요. 선택 종료는 -1 입니다.");
+        int sel =0;
+        int[] select = new int[10];
+        int k=0;
+        while (sel!=-1 && k<select.length) {
+            System.out.print("상품번호 입력 >>>");
+            sel = sc.nextInt();
+            if(sel<-1 || sel > products.length-1){
+                System.out.println("없는 상품입니다. 상품을 더 담아주세요~~");
+                break;
+            }
+            select[k++]=sel;
+        }
+
+정답: break => continue

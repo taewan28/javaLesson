@@ -8,6 +8,7 @@ public class MyClassA implements InterfaceA {
 	
 	//오버라이드는 상속에서 사용
 	//인터페이스에서는 '구현'이 더 맞습니다.
+	// 추상구현 / 다중구현
 	@Override
 	public void methodA() {
 		System.out.println("나는 methodA !!");
