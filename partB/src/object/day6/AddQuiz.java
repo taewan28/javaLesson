@@ -23,8 +23,6 @@ public class AddQuiz {
         this.data1 = data1;
     }
 
-    
-
     public void setdata2(int data2) {
         this.data2 = data2;
         }
