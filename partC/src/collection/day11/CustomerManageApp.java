@@ -136,23 +136,33 @@ public class CustomerManageApp {
     }
 
     private void modifycustomer() {
-        System.out.println("\t:: 고객을 검색합니다.::");
-        System.out.print("수정할 고객을 입력해주세요 _");
+        System.out.println("\t:: 고객을 검색합니다. ::");
+        System.out.print("수정할 고객을 입력해주세요: ");
         String find = System.console().readLine();
         boolean isFind = false;
-         for(int i=0; i<customers.size(); i++){
-            if(customers.get(i).getName().equals(find)){
-                System.out.println("고객명단" + i + "에서 이름를 찾았습니다.");
-                System.out.println(find+"번호를 수정하겠습니다.");
+        
+        for (int i = 0; i < customers.size(); i++) {
+            if (customers.get(i).getName().equals(find)) {
+                System.out.println("고객명단 " + i + "에서 이름을 찾았습니다.");
+                System.out.println(find + "의 번호를 수정하겠습니다.");
                 String phonemodify = System.console().readLine();
-                System.out.println(find+"등급를 수정하겠습니다.");
+                System.out.println(find + "의 등급을 수정하겠습니다.");
                 int phonemodify2 = Integer.parseInt(System.console().readLine());
-                customers.get(i).modify(phonemodify, phonemodify2);
+                
+                if (phonemodify2 > 0 && phonemodify2 < 4) {
+                    customers.get(i).modify(phonemodify, phonemodify2);
+                    System.out.println("고객 정보가 수정되었습니다.");
+                } else {
+                    System.out.println("그룹 수정은 0보다 크고 4보다 작은 값을 입력해주세요.");
+                }
+                
+                isFind = true;
             }
-            isFind = true;
         }
-        if(!isFind==false)
-                System.out.println("삭제할 이름이 명단에 없습니다.");
+        
+        if (!isFind) {
+            System.out.println("삭제할 이름이 명단에 없습니다.");
+        }
     }
 
 
