@@ -5,7 +5,7 @@ import java.util.*;
 
 public class JavaWordApp {
     public static void main(String[] args) {
-        
+        //JavaWord 는 단어 객체, JavaWordBook 은 단어장 객체
         //단어장을 시작하는 프로그램입니다.
         //1. 단어장을 생성
         JavaWordbook myBook = new JavaWordbook();
@@ -21,7 +21,7 @@ public class JavaWordApp {
         myBook.addWord(new JavaWord("binary", "2진수의", 3));
 
         //메조장 출력
-        myBook.wordAllPrint();
+        myBook.print();
 
         //3.단어 조회
         //1)영어단어 입력하면 찾아주기
@@ -31,7 +31,7 @@ public class JavaWordApp {
 
         //2)List<JavaWord> searchWordByLevel(int level) : 레벨로 조회하기
         List<JavaWord> list = myBook.searchWordByLevel(1);
-        myBook.wordListPrint(list);
+        JavaWordbook.wordListPrint(list);
 
 
         //4.단어 삭제
