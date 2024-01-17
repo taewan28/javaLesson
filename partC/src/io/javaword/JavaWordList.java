@@ -1,6 +1,7 @@
 package io.javaword;
 
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -82,10 +83,10 @@ public class JavaWordList implements WordList{
     //단어 추가
     @Override
     public void add(JavaWord word) {
-        if(words.size()==WordList.Max_LENGTH){
-            System.out.println("단어장이 꽉 찼습니다. 단어장을 새로 만들어 주세요.");
-            return;
-        }
+        if(words.size()==5)
+        //if(words.size()==WordList.Max_LENGTH){      //illegal : 불법적인
+            throw new IllegalArgumentException("단어장이 꽉 찼습니다. 단어장을 새로 만들어 주세요.");
+          
         words.add(word);
     }
 
@@ -103,7 +104,14 @@ public class JavaWordList implements WordList{
     //단어를 인덱스로 삭제
     @Override
     public JavaWord remove(int index) {
-        JavaWord word = words.remove(index);            //삭제한 데이터를 리턴합니다.
+        if(index < 0 || index > words.size())
+            //throw new Exception("삭제할 인덱스 범위가 잘못된 값입니다.");  // 체크드
+            throw new IllegalArgumentException("삭제할 인덱스 범위가 잘못된 값입니다.");
+            //새로운 Exception 객체를 생성하면 개발자가 만든 예외가 발생됩니다.
+            //      발생시킬 익셉션 종류는 IllegalArgumentException 와 같은 이름으로 많이 사용합니다.
+            //      예를 들면 웹개발 할떄는 모든 예외를 한번에 처리하기 위해 이런 방법을 사용합니다.
+
+        JavaWord word = words.remove(index);            //index 삭제할 위치. 삭제한 데이터를 리턴합니다.
         return word;
     }
 
