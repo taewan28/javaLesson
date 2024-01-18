@@ -2,6 +2,7 @@ package collection.day11;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import collection.myapp.JavaWord;
 
 public class JavaWordApp_V2 {
@@ -43,7 +44,9 @@ private List<JavaWord> words = new ArrayList<>();
 
     private void initialize() {
         // words 리스트 요소를 몇개만 저장해서 초기화(테스트용)
-        words.add(new JavaWord("public", "공용의", 1));
+        words.add(new JavaWord("public", "공용의", 3));
+        words.add(new JavaWord("public", "공통의", 1));
+        words.add(new JavaWord("public", "공적의", 2));
         words.add(new JavaWord("private", "사적의", 1));
         words.add(new JavaWord("iterator", "반복자", 3));
         words.add(new JavaWord("application", "응용프로그램",2));
@@ -67,20 +70,22 @@ private List<JavaWord> words = new ArrayList<>();
         System.out.println("\t:: 단어 검색합니다.::");
         System.out.print("삭제할 단어를 영문으로 입력하세요 _");
         String find = System.console().readLine();
-        boolean isFind = false;
-         for(int i=0; i<words.size(); i++){
+        boolean isFind = false;                     //단어 존재 유무 확인 변수
+         for(int i=0; i<words.size(); i++){         //for(JavaWord w : words) -> 오류
             if(words.get(i).getEnglish().equals(find)){
-                System.out.println("인덱스" + i + "에서 단어를 찾았습니다.");
+                System.out.println("단어를 찾았습니다. -> " +  words.get(i));
                 System.out.println("삭제하려면 엔터, 취소는 n을 입력하세요.");
                 if(System.console().readLine().equals("n"))
                             continue;
                 else{
                     //단어 삭제.
                     words.remove(i); System.out.println("단어 삭제 완료!!");
+                    //삭제 후 다음 인덱스는 초기값보다 하나 작아져야 합니다.
+                    i--;
                 }
             }   //단어 비교 if end
         }   //for end
-        if(!isFind)
+        if(!isFind)             //isFind==false
                 System.out.println("삭제할 단어는 단어장에 없습니다.");
     }
     // 새로운 검색 메소드 정의
