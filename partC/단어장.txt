@@ -1,0 +1,5 @@
+list, ���, 1
+static, ������, 2
+main, �ֿ���, 1
+remove, �����ϴ�, 2
+interface, ����, 3
