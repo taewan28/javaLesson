@@ -155,11 +155,17 @@ public class CustomerManageApp {
                 } else {
                     System.out.println("그룹 수정은 0보다 크고 4보다 작은 값을 입력해주세요.");
                 }
+<<<<<<< HEAD
+                isFind = true;
+            }
+        }
+=======
                 
                 isFind = true;
             }
         }
         
+>>>>>>> b50076eca74f78bd264ddfc6c89e7290e767b0af
         if (!isFind) {
             System.out.println("삭제할 이름이 명단에 없습니다.");
         }
