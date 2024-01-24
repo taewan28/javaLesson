@@ -84,10 +84,21 @@ SELECT *FROM TBL_EXBUY te ;
 SELECT *FROM TBL_EXBUY;
 DROP TABLE TBL_EXBUY;
 
-SELECT * FROM TBL_EXBUY WHERE id = 'mina012';
 
---문제 :구매내역중 g가 포함된 상품코드 출력하시오.
+--출제자 김태완)구매내역중 g가 포함된 상품코드 출력하시오.
 SELECT * FROM TBL_EXBUY WHERE productcode LIKE '%g';
+
+--출제자 이광원)2021년 12월 에 구매된 상품 개수 합계는?
+SELECT SUM(buy_count) AS   "12월 구매된 상품 수"  FROM TBL_EXBUY te WHERE  TO_CHAR(buy_date ,'yyyy-mm')='2021-12';
+
+--출제자 권태윤)mina012 아이디가 구매한 제품들의 총 개수를 구하시오.
+SELECT  SUM(buy_count) FROM TBL_EXBUY te  WHERE ID  = 'mina012';
+
+-- 출제자 고길현) 상품 가격의 총합과 평균 구하기
+SELECT SUM(cost) "합계", AVG(cost) "평균" FROM TBL_EXPRODUCT;
+
+-- 출제자 강주찬) 10000원 이상 60000원 이하의 상품은 ?
+SELECT * FROM TBL_EXPRODUCT WHERE cost BETWEEN 10000 AND 60000;
 
 
 
