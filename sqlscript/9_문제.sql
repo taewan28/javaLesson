@@ -61,7 +61,26 @@ INSERT INTO TBL_EXBUY VALUES ('hongGD' , 'DOWON123a' , 1 ,
 						to_date('2021-10-21 11:13:25','yyyy-mm-dd hh24:mi:ss'));
 INSERT INTO TBL_EXBUY VALUES ('hongGD' , 'APLE5kg' , 1 ,
 						to_date('2022-04-21 11:13:25','yyyy-mm-dd hh24:mi:ss'));
- 
+					
+-- 구매 테이블에 기본키 만들기
+-- 1)기본키에 들어갈 값은 시퀀스로 만듭니다. exbuy_pk_seq 시작값은 1001로 합니다
+CREATE  SEQUENCE exbuy_pk_seq START WITH 1001;
+					
+-- 2) 기본키 컬럼을 buy_idx 로 하여 컬럼추가. number(8)
+ALTER TABLE TBL_EXBUY ADD buy_idx number(8);
+					
+							
+-- 3) 기본 행에 적용할 buy_idx 컬럼값을 저장하기. not null과 unique 적용하여 설정하기
+
+-- 4) buy_idx 컬럼에 대해 primary 키 설정하기
+ALTER TABLE TBL_EXBUY ADD CONSTRAINT tal_exbuy_pk PRIMARY KEY (buy_idx);
+
+-- 5) 이제부터 새로운 행을 추가할 떄에는 시퀀스 함수로 pk 값을 insert 합니다.
+INSERT INTO TBL_EXBUY (buy_idx,id,productcode,buy_count)VALUES (exbuy_pk_seq.nextval,'mina012' , 'CJBAb12g' , 5);
+SELECT *FROM TBL_EXBUY te ;
+
+
+
 SELECT *FROM TBL_EXBUY;
 DROP TABLE TBL_EXBUY;
 
