@@ -75,4 +75,4 @@ VALUES (buy_pk_seq.nextval, 'hongGD' , 'DOWON123a' , 1 ,to_date('2024-01-13 14:3
 INSERT INTO TBL_BUY 
 VALUES (buy_pk_seq.nextval,  'hongGD' , 'APLE5kg' , 1 ,to_date('2023-09-09 14:33:15','yyyy-mm-dd hh24:mi:ss'));
 
-SELECT *FROM tbl_buy;
+

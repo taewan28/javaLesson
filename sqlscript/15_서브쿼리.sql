@@ -31,6 +31,19 @@ FROM
 		WHERE tp.PCODE = tb.PCODE) saleMoney
 GROUP BY saleMoney.PCODE;
 
+-- 서브쿼리 없이
+SELECT 
+    tp.PCODE,
+    SUM(tb.QUANTITY) AS TotalQuantity,
+    SUM(tp.PRICE * tb.QUANTITY) AS TotalAmount
+FROM 
+    TBL_PRODUCT tp
+JOIN 
+    TBL_BUY tb ON tp.PCODE = tb.PCODE
+GROUP BY 
+    tp.PCODE;
+
+
 -- 오라클 with 구문 : select 조회 결과를 저장해 놓고 사용하도록 합니다.
 WITH saleMoney
 AS
@@ -64,6 +77,19 @@ HAVING SUM("구매 금액") BETWEEN 20000 AND 70000;
  * 내림차순 또는 오름차순 정렬된 결과에서 top3 조회하기 
  */
 
+--서브쿼리 없이 변경
+SELECT 
+    tp.PCODE,
+    SUM(tb.QUANTITY) AS TotalQuantity,
+    SUM(tp.PRICE * tb.QUANTITY) AS TotalAmount    
+FROM 
+    TBL_PRODUCT tp
+JOIN 
+    TBL_BUY tb ON tp.PCODE = tb.PCODE
+GROUP BY 
+    tp.PCODE
+HAVING 
+	SUM(tp.PRICE * tb.QUANTITY) BETWEEN 20000 AND 70000; 
 
 
 
