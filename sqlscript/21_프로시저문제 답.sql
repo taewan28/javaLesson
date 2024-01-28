@@ -1,4 +1,4 @@
-REATE OR REPLACE PROCEDURE "C##IDEV".money_of_day(
+CREATE OR REPLACE PROCEDURE "C##IDEV".money_of_day(
    p_id IN tbl_custom.custom_id %TYPE,      -- 출력(리턴) 변수
    p_date IN varchar2,      -- 출력(리턴) 변수
    p_money OUT NUMBER
@@ -11,7 +11,7 @@ BEGIN
    SELECT PCODE, QUANTITY
       INTO v_pcode , v_quantity
    FROM TBL_BUY
-   WHERE CUSTOMID = p_id AND BUY_DATE = p_date;
+   WHERE CUSTOMID = p_id AND BUY_DATE = TO_DATE(p_date, 'yyyy-mm-dd');
    
    DBMS_OUTPUT.PUT_LINE('* p : ' || v_pcode || v_quantity );
    SELECT PRICE
@@ -27,3 +27,16 @@ BEGIN
    WHEN no_data_found then
    DBMS_OUTPUT.PUT_LINE('조건에 맞는 데이터가 없습니다.');
 END;
+
+
+DECLARE
+		p_id varchar2(20);
+		p_date varchar2(20);
+		p_money NUMBER;
+	BEGIN
+		p_id :='mina012';
+		p_date := '2023-11-10';
+		money_of_day(p_id,p_date,p_money);
+		--money_of_day(char(10)||'고객ID : '|| p_id || '날짜:'|| p_date);
+		dbms_output.put_line('고객님의 구매금액은' || p_money ||'입니다.');
+	END;
