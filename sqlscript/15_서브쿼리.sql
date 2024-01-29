@@ -69,7 +69,7 @@ AS
 SELECT saleMoney.PCODE,SUM(saleMoney.QUANTITY),SUM("구매 금액")
 FROM saleMoney
 GROUP BY saleMoney.pcode
-HAVING SUM("구매 금액") BETWEEN 20000 AND 70000;
+HAVING SUM("구매 금액") BETWEEN 100000 AND 200000;
 
 /* 고객별로 구매금액이 가장 높은 상품코드를 조회하세요.
  * 	ㄴ 오라클 RANK 함수 (그룹화 결과에 대한 순위를 제공)
@@ -79,7 +79,7 @@ HAVING SUM("구매 금액") BETWEEN 20000 AND 70000;
 
 --서브쿼리 없이 변경
 SELECT 
-    tp.PCODE,
+    tb.CUSTOMID,
     SUM(tb.QUANTITY) AS TotalQuantity,
     SUM(tp.PRICE * tb.QUANTITY) AS TotalAmount    
 FROM 
@@ -87,9 +87,9 @@ FROM
 JOIN 
     TBL_BUY tb ON tp.PCODE = tb.PCODE
 GROUP BY 
-    tp.PCODE
+    tb.CUSTOMID
 HAVING 
-	SUM(tp.PRICE * tb.QUANTITY) BETWEEN 20000 AND 70000; 
+	SUM(tp.PRICE * tb.QUANTITY) BETWEEN 100000 AND 200000; 
 
 
 
