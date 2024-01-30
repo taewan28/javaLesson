@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import project.dao.TblCustomerDao;
+import project.vo.CustomerVo;
+
 public class CustomerApp {
     
     public static void main(String[] args) {

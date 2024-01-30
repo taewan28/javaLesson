@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import project.vo.CustomerVo;
+
 public class InsertDMLTest {
     
     public static void main(String[] args) { 

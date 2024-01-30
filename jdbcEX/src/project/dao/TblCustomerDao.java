@@ -1,10 +1,13 @@
-package jdbc.day1;
+package project.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import project.vo.CustomerVo;
 
 public class TblCustomerDao {
     public static final String URL = "jdbc:oracle:thin:@//localhost:1521/XE";
@@ -78,13 +81,54 @@ public class TblCustomerDao {
         
     }
 
-    //회원정보 조회 : select * from tbl_custom where custom_id =?
+    //회원정보 ※PK※ 조회 - 조회 결과 행 개수는? : select * from tbl_custom where custom_id =?
+    //                          ㄴ 0 개 : 조회 결과 없다. 조회 결과가 있다면 only 1개.!!
+    //                          ㄴ 리턴 타입 CustomerVo
+
     public CustomerVo getCustomer(String customerID){
-        return null;
+        CustomerVo vo = null;
+        String sql = "select * from tbl_custom where custom_id = ?";
+        try(
+            Connection connection = getConnection();
+            PreparedStatement pstmt =connection.prepareStatement(sql); 
+        ){
+            pstmt.setString(1, customerID);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){  //첫번째 행 조회 결과가 있으면 true, 없으면 false
+                //할일 : 객체 만들어서 vo 변수에 참조시키기
+                vo = new CustomerVo(rs.getString(1),
+                                    rs.getString(2), 
+                                    rs.getString(3), 
+                                    rs.getInt(4), 
+                                    rs.getDate(5));
+            }
+         }catch(Exception e) {
+            System.out.println("allCustomers 예외 발생 : " + e.getMessage());
+         }
+        return vo;
     }
 
     //관리자를 위한 기능 : 모든 회원정보 조회 : select *from tbl_custom
     public List<CustomerVo> allCustomers(){
-        return null;
+        List<CustomerVo> list = new ArrayList<>();
+        String sql = "select * from tbl_custom";
+        try (
+            Connection connection = getConnection();
+            PreparedStatement pstmt =connection.prepareStatement(sql); 
+        ){
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                list.add(new CustomerVo(rs.getString(1),
+                                        rs.getString(2), 
+                                        rs.getString(3), 
+                                        rs.getInt(4), 
+                                        rs.getDate(5)));
+                              }
+        }
+        catch(Exception e) {
+            System.out.println("allCustomers 예외 발생 : " + e.getMessage());
+        }
+        return list;
     }
 }
+

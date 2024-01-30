@@ -1,4 +1,4 @@
-package jdbc.day1;
+package project.vo;
 
 import java.sql.Date;
 //Value Object : 데이터 형식으로서 정의되는 클래스
@@ -43,8 +43,8 @@ public class CustomerVo {            //tbl_custom 테이블의 컬럼과 1:1 대
     
     @Override
     public String toString() {
-        return "BuyVo [custimId=" + customId + ", name=" + name + ", email=" + email + ", age=" + age + ", reg_data="
-                + reg_data + "]";
+        return "CustomerVo [" + customId + "," + name + "," + email + "," + age + ","
+                + reg_data + "]\n";
     }
 
     @Override
