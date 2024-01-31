@@ -1,6 +1,8 @@
 package jdbc.day2;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import project.dao.TblBuyDao;
 import project.dao.TblProductDao;
@@ -69,27 +71,42 @@ public class CartApp_2 {
                     int quantity = Integer.parseInt(System.console().readLine());
 
                     BuyVo vo = new BuyVo(0, customerid, pcode, quantity, null);
-                    dao.insert(vo);
+                    if(buyDao.insert(vo)==1)
+                        System.out.println("상품을 담았습니다.");
+                    else
+                        System.out.println("상품코드 또는 고객아이디 오류입니다.");
                     break;
+                    
                 case "D","d":
                     System.out.println("우리 쇼핑몰 [구매 취소]- 합니다.");
                     System.out.print(" 인덱스 번호를 입력하세요. __ ");
                     int buy_IDX = Integer.parseInt(System.console().readLine());
-                    dao.delete(buy_IDX);
-                    break; 
+                    if(buyDao.delete(buy_IDX)==1)
+                        System.out.println("정상적으로 취소 되었습니다.");
+                    else
+                        System.out.println("없는 구매번호입니다..");
+                    break;
                 case "Q","q":
                         System.out.println("우리 쇼핑몰 [구매 수량 변경]- 합니다.");
                         System.out.print(" 인덱스 번호를 입력하세요. __ ");
                         buy_IDX = Integer.parseInt(System.console().readLine());
 
-                        System.out.print(" 상품 코드를 입력하세요. __ ");
-                        pcode = System.console().readLine();
+                        //System.out.print(" 상품 코드를 입력하세요. __ ");
+                        //pcode = System.console().readLine();
                 
                         System.out.print(" 수량를 입력하세요. __ ");
                         quantity = Integer.parseInt(System.console().readLine());
                         
-                        vo = new BuyVo(buy_IDX, customerid, pcode, quantity, null);
-                        dao.update(vo);
+                        //Map을 사용해 봅시다
+                        Map<String,Integer> arg = new HashMap<>();
+                        //vo = new BuyVo(buy_IDX, customerid, null, quantity, null);
+                        arg.put("quantity",quantity);
+                        arg.put("buy_idx",buy_IDX);
+                        
+                        if(buyDao.update(arg)==1)
+                        System.out.println("정상적으로 수정 되었습니다.");
+                        else
+                        System.out.println("없는 구매번호입니다..");
                         break;
                 case "X","x":
                     System.out.println("프로그램 종료.");
