@@ -7,7 +7,8 @@
 --A-1. 'mina012' 가 구매한 상품 금액 합계(이광원)
 SELECT CUSTOMID  ,SUM(PRICE * QUANTITY) "구매 금액"
 	FROM  TBL_PRODUCT tp
-	JOIN  TBL_BUY tb ON tp.PCODE = tb.PCODE
+	JOIN  TBL_BUY tb 
+	ON tp.PCODE = tb.PCODE
 	AND CUSTOMID ='mina012'
 	GROUP BY CUSTOMID  ;
 
@@ -19,7 +20,7 @@ SELECT tb.CUSTOMID ,NAME, PCODE ,QUANTITY,BUY_DATE
 	WHERE tc.NAME LIKE '%길동';
 
 -- 데이터 추가 후 실행하세요.
-INSERT INTO TBL_CUSTOM 
+INSERT INTO TBL_CUSTOM ssSS
 			VALUES ('dongL','이길동','lee@daum.net',25,sysdate);
 INSERT INTO TBL_BUY 
 			VALUES (buy_pk_seq.nextval,'dongL','DOWON123a',2,sysdate);
@@ -124,7 +125,7 @@ SELECT tp.PCODE, tp.PNAME "상품명", avg(tb.QUANTITY) "평균 구매 개수"
 	FROM TBL_BUY tb 
 	JOIN TBL_PRODUCT tp 
 	ON tb.PCODE = tp.PCODE
-	WHERE tp.PRICE >= 10000
+	--WHERE tp.PRICE >= 10000
 	GROUP BY tp.pcode, tp.PNAME
 	ORDER BY tp.PCODE 
 	;

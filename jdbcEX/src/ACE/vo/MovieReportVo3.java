@@ -1,4 +1,4 @@
-package project.vo;
+package ACE.vo;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -10,7 +10,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @EqualsAndHashCode
 
-public class CustomerBuyVo {
+public class MovieReportVo3 {
     private int BUY_IDX;
     private String pcode;
     private String pname;
