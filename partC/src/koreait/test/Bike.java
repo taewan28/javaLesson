@@ -1,54 +1,69 @@
 package koreait.test;
 
 public class Bike extends Product{
-
-    public Bike(int price, String prdName, int speed) {
-        
+    
+    private int speed;
+    
+    public Bike(int price,String prdName, int speed) {
         this.price = price;
         this.prdName = prdName;
         this.speed = speed;
-
     }
- 
-@Override
-public String getPrdName() {
 
-    return super.getPrdName();
+    public int getSpeed() {
+        return speed;
+    }
 
-}
-@Override
-public int getPrice() {
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+    
+    public String ride(){
+        return "당신은 이것을 시속"+ this.speed+"km로 탈수 있습니다.";
+        
+    }
 
-    return super.getPrice();
-
-}
-
-@Override
-public int getSpeed() {
-
-    return super.getSpeed();
- 
-}
     
 
-class Electronics extends Product{
-
-    public Electronics(int price, String prdName) {
-        
-        this.price = price;
-        this.prdName = prdName;
-
+    @Override
+    public String sell(Object object) {
+        return String.format("[%s] 행사 - %d%%인하",prdName,object);
     }
 
     @Override
-    public int getPrice() {
-        return super.getPrice();
+    public String toString() {
+        return "Bike [speed=" + speed + "]";
+    }
+
+    
+}
+
+class Eletronics extends Product{
+    
+    private double kwh;
+
+    public double getKwh() {
+        return kwh;
+    }
+
+    public void setKwh(double kwh) {
+        this.kwh = kwh;
+    } 
+
+    public double power(){
+        return this.kwh*24;
     }
 
     @Override
-    public String getPrdName() {
-        return super.getPrdName();
+    public String toString() {
+        return "Eletronics [kwh=" + kwh + "]";
     }
 
-  }
+    @Override
+    public String sell(Object object) {
+        return String.format("[%s] 증정- %s",prdName,object);
+    }
+    
+    
+
 }

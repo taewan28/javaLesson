@@ -14,7 +14,5 @@ public abstract class Product {
     public String toString() {
         return "[prdName=" + prdName + ", price=" + price + "]";
     }
-
-    
 }
 

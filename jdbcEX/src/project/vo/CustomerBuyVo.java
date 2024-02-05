@@ -17,6 +17,7 @@ public class CustomerBuyVo {
     private int price;
     private int quantity;
     private Timestamp BUY_DATE;
+    
     @Override
     public String toString() {
         return String.format("%6d %15s %40s\t %8d %15d %40s" ,BUY_IDX,pcode,pname,price,quantity,BUY_DATE);
