@@ -82,8 +82,24 @@ END;
 
 -- 저장프로시저 예제 2
 -- 구매 수량이 최대인 고객의 이름, 나이 출력하는 프로시저 : max_custom
+
+--일반적인 SQL은? 구매 수량이 최대=> tbl_buy 테이블, 고객의 이름, 나이=>tbl_custom
+SELECT name,age
+FROM TBL_CUSTOM tc 
+WHERE tc.CUSTOM_ID =(
+	SELECT CUSTOMID 
+	FROM TBL_BUY tb 
+	WHERE tb.quantity = (
+		SELECT MAX(quantity)FROM TBL_BUY tb2
+	)
+);
+-- 복습: 프로시저는 SQL로 만든 프로그램.=> 여러 개의 DML로 구성이 됩니다.PLSQL라고 부릅니다.
+--						  => 필요에 따라 조회 결과를 저장하는 변수를 사용할 수 있다.
+
+
+
 CREATE OR REPLACE PROCEDURE max_custom(	  -- 자바의 메소드 인자와 같은 개념
-   p_name OUT tbl_custom.NAME %TYPE,      -- 출력(리턴) 변수
+   p_name OUT tbl_custom.NAME %TYPE,      -- 출력(리턴)값이 있다면 OUT 변수를 사용합니다.
    p_age OUT tbl_custom.AGE %TYPE
 )
 IS

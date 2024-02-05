@@ -48,10 +48,9 @@ public class ProductApp {
         System.out.println(result);
 
 
+
         System.out.println("\n 문제 6)");
         System.out.println(cart[5].sell("사운드바"));
-
-
    }
 }
     

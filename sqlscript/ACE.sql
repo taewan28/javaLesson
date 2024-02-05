@@ -50,13 +50,37 @@ VALUES (res_pk_seq.nextval, 'mond' , '대충액션영화제목' ,to_date('2022-0
 INSERT INTO tbl_reserve
 VALUES (res_pk_seq.nextval, 'abcd' , '서울의봄' ,to_date('2023-12-10 09:13:30','yyyy-mm-dd hh24:mi:ss'));
 INSERT INTO tbl_reserve
-VALUES (res_pk_seq.nextval, 'abcd' , '워낭소리' ,to_date('2024-01-21 19:53:11','yyyy-mm-dd hh24:mi:ss'));
+VALUES (res_pk_seq.nextval, 'abcd' , '워낭소리' ,to_date('2024-03-21 19:53:11','yyyy-mm-dd hh24:mi:ss'));
 INSERT INTO tbl_reserve
 VALUES (res_pk_seq.nextval, 'xodbs' , '어바웃타임' ,to_date('2024-01-01 12:12:12','yyyy-mm-dd hh24:mi:ss') );
 INSERT INTO tbl_reserve 
 VALUES (res_pk_seq.nextval, 'app1e', '샤이닝', to_date('2024-01-30 14:32:30', 'yyyy-mm-dd hh24:mi:ss'));
 INSERT INTO tbl_reserve 
 VALUES (res_pk_seq.nextval, 'app1e', '더 넌', to_date('2024-01-16 15:32:41', 'yyyy-mm-dd hh24:mi:ss'));
+
+
+
+
+SELECT  
+FROM TBL_RESERVE tr 
+JOIN TBL_VIEWER tv 
+ON tr.CUSTOM_ID  = tv.CUSTOM_ID  
+WHERE tv.name LIKE '%태완%';
+
+SELECT * 
+FROM TBL_MOVIE;
+
+SELECT TITLE ,CATEGORY ,VIEW_AGE ,PRICE
+FROM TBL_VIEWER tv 
+IN (SELECT VIEW_AGE
+	FROM TBL_MOVIE tm
+	WHERE 
+	
+	)
+	
+
+
+WHERE 
 
 
 

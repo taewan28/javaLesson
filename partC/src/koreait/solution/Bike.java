@@ -52,7 +52,7 @@ class Eletronics extends Product{
 
     //3) price,prdName 필드값만 초기화 - 생성자
     public Eletronics(int price, String prdname) {
-        super();
+        //super();
         this.price=price;
         this.prdName=prdName;
 
@@ -80,8 +80,7 @@ class Eletronics extends Product{
 
     @Override
     public String toString() {
-        return "Eletronics ["+ super.toString() +", kwh=" + kwh + "]";
+        return "Eletronics ["+ super.toString( ) +", kwh=" + kwh + "]";
     }
 
-    
 }

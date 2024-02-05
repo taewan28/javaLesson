@@ -30,11 +30,21 @@ public class CartApp_4 {
 
     private void showMenu() {
         System.out.println(".".repeat(70));
-        System.out.println("[C] 카테고리별 상품 조회      [P] 상품명 검색     [M]나의 구매내역");
+        System.out.println("[C] 카테고리별 상품 조회      [P] 상품명 검색     [M]나의 구매내역   [T]날짜별 결제 금액 조회");
         System.out.println("[B] 구매하기   [D] 구매 취소  [Q] 구매 수량 변경  [X] 구매 종료");
         System.out.println("::장바구니::[A] 담기  [L] 목록  [R] 삭제   [Y] 모두 구매 ");
         System.out.println(".".repeat(70));
     }
+
+    private void ShowMyPay(String customerid){
+        System.out.println("고객ID 와 날짜를 입력하면 총 구매금액을 조회합니다.");
+        System.out.println("구매 날짜 입력_");
+        String buydate = System.console().readLine();       //입력 형식 yyyy-mm-dd
+        System.out.println(String.format("총 구매금액 : %,d 원입니다. ",buyDao.money_of_dayByCustomer(customerid,buydate)));
+        
+        
+    }
+
 
     private void showMyPage(String customerid) {
         List<CustomerBuyVo> result = buyDao.selectCustomerBuyList(customerid);
@@ -43,7 +53,7 @@ public class CartApp_4 {
     }
 
     private void showProductListByCategory() {
-        System.out.println("카테고리 : A1-과일 A2-수입과일  B1-인스턴스  B2-선물세트 C1-과자류");
+        System.out.println("카테고리 : A1- A2-수입과일  B1-인스턴스  B2-선물세트 C1-과자류");
         System.out.print("카테고리 입력__");
         String category = System.console().readLine();
         List<ProductVo> productList = productDao.SELECTByCategory(category);
@@ -105,6 +115,8 @@ public class CartApp_4 {
         }
     }
 
+
+
        //상품 목록을 선택한 카테고리에 대해 보여주기  (구매할 상품 조회)
        //또는 상품명으로 검색 (구매할 상품 조회)
        //또는 입력한 아이디로 구매한 구매내역 보여주기 (구매수량 변경 또는 구매 취소 buy_idx 조회)
@@ -143,7 +155,10 @@ public class CartApp_4 {
                     break;
                 case "R","r":
                     removeCartItem();
-                    break;    
+                    break;
+                case "T","t":
+                    ShowMyPay(customerid);
+                    break;     
                 case "Y","y":
                     buyCartItems();
                     break;
