@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ACE.vo.MovieReserveVo;
+import ACE.vo.MovieViewVo;
 import ACE.vo.MovieVo;
 import jdbc.day1.OracleConnectionUtil;
 
@@ -63,6 +65,30 @@ public class Moviedao {
             e.printStackTrace();
         }
 
+        return list;
+    }
+
+    public List<MovieVo> Movielist(String movie){
+        List<MovieVo> list = new ArrayList<>();
+
+        String sql = "SELECT * \r\n " +
+                     "FROM TBL_MOVIE\r\n";
+
+        try (
+            Connection connection = getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+        ){
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                list.add(new MovieVo(rs.getString(1),
+                                      rs.getString(2),
+                                      rs.getInt(3),
+                                      rs.getInt(4)));
+            }
+        } catch (SQLException e) {
+            System.out.println("Movielist 예외 발생 : "+e.getMessage());
+            e.printStackTrace();
+        }
         return list;
     }
 }

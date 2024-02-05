@@ -1,8 +1,7 @@
 package ACE;
 
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 import ACE.dao.Moviedao;
 import ACE.dao.Reservedao;
@@ -16,7 +15,7 @@ public class MovieApp {
     private Viewerdao viewerDao = new Viewerdao();
     private Reservedao reserveDao = new Reservedao();
     private Moviedao movieDao = new Moviedao();
-
+    private String viewerid = null;
     public static void main(String[] args) {
         MovieApp app = new MovieApp();
         app.start();
@@ -26,7 +25,7 @@ public class MovieApp {
         
         System.out.println("★ Almond Cinema★ 에 오신걸 환영합니다. 간편 로그인으로 서비스를 이용해주세요.");
         System.out.print("아이디 입력 __");
-        String viewerid = System.console().readLine();
+        viewerid = System.console().readLine();
         
         boolean run = true;
         while (run) {       
@@ -64,12 +63,15 @@ public class MovieApp {
                 searchProductListByPname();
                     break;
                 case "R","r":
+                showmovielist(viewerid);
                 reserveMovie(viewerid);
                     break;
                 case "D","d":
+                showMyReserve(viewerid);
                 deleteReserve();
                     break;
                 case "C","c":
+                showMyReserve(viewerid);
                 modifyMovie();
                     break;
                 case "X","x":
@@ -94,7 +96,7 @@ public class MovieApp {
     private void showMenu() {
         System.out.println(".".repeat(70));
         System.out.println("[G] 장르별 영화 조회      [T] 제목명 검색");
-        System.out.println("[M]나의 예매내역    ");
+        System.out.println("[M]나의 예매내역          [R]");
         System.out.println("[R] 예매하기   [D] 예매 취소  [C] 예매 영화 변경  [X] 예매 종료");
         System.out.println(".".repeat(70));
     }
@@ -133,7 +135,6 @@ public class MovieApp {
     private void reserveMovie(String viewerid){
         System.out.print(" 영화 제목을 입력하세요. __ ");
         String title = System.console().readLine();
-
         MovieReserveVo vo = new MovieReserveVo(0, viewerid, title, null);
         if(reserveDao.reserve(vo)==1)
             System.out.println(String.format("[%s] 영화를 예매하였습니다", title));
@@ -143,14 +144,15 @@ public class MovieApp {
 
     private void deleteReserve(){
         System.out.print("취소할 예매 번호를 입력하세요. __ ");
-        if(reserveDao.delete(Integer.parseInt(System.console().readLine()))==1)
-            System.out.println("삭제하려면 엔터, 취소는 n을 입력하세요.");
-            if(System.console().readLine().equals("n"))
-            System.out.println("정상적으로 취소되었습니다.");
-                continue;
-        else
-            System.out.println("없는 예매번호 입니다.");
+        int chk = Integer.parseInt(System.console().readLine());
+        System.out.println("예매 번호 >>>>>");
+            if(viewerDao.selAll(viewerid).getRes_idx() == chk && reserveDao.delete(chk)==1){
+                    System.out.println("삭제성공");
+            }else{
+                System.out.println("권한이 없거나 없는 예매번호 입니다.");
+            }      
     }
+
 
     private void showMyReserve(String viewerid) {
         List<MovieViewVo> result = reserveDao.selectViewerReserveList(viewerid);
@@ -161,7 +163,13 @@ public class MovieApp {
     private void modifyMovie(){
         System.out.print(" 수정할 예매 번호를 입력하세요. __ ");
                 int res_idx = Integer.parseInt(System.console().readLine());
-
+                if(viewerDao.selAll(viewerid).getRes_idx() == res_idx){
+                    if(reserveDao.delete(res_idx)==1){
+                    }
+                }else{
+                    System.out.println("권한이 없거나 없는 예매번호 입니다.");
+                    return;
+                }
                 System.out.print(" 변경할 영화제목을 새로 입력하세요. __ ");
                 String title = System.console().readLine();
 
@@ -171,6 +179,12 @@ public class MovieApp {
                     System.out.println("정상적으로 수정되었습니다.");
                 else
                     System.out.println("없는 구매번호 입니다.");
+    }
+    
+    private void showmovielist (String viewerid) {
+        List<MovieVo> result = movieDao.Movielist(viewerid);
+                    for(MovieVo vo : result)  
+                            System.out.println(vo);
     }
 
 }
