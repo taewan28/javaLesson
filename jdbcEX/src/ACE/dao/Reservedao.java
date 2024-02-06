@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import ACE.vo.MovieReserveVo;
-import ACE.vo.MovieViewVo;
 
 public class Reservedao {
     public static final String URL ="jdbc:oracle:thin:@//localhost:1521/xe";
@@ -69,8 +68,8 @@ public class Reservedao {
         return result;
     }
 
-    public List<MovieViewVo> selectViewerReserveList(String viewerid){
-        List<MovieViewVo> list = new ArrayList<>();
+    public List<MovieReserveVo> selectViewerReserveList(String viewerid){
+        List<MovieReserveVo> list = new ArrayList<>();
 
         String sql = "SELECT res_idx , tr.title, price,  res_date "+
                     "FROM TBL_MOVIE tm , TBL_RESERVE tr "+
@@ -86,9 +85,9 @@ public class Reservedao {
             
             
             while (ps.next()) {
-                list.add(new MovieViewVo(ps.getInt(1),
+                list.add(new MovieReserveVo(ps.getInt(1),
                                             ps.getString(2),
-                                            ps.getInt(3),
+                                            ps.getString(3),
                                             ps.getDate(4)
                                             ));
             }
@@ -100,6 +99,77 @@ public class Reservedao {
 
         return list;
     }
+
+
+    public MovieReserveVo selAll(String id){
+        String sql = "SELECT * \r\n" + 
+                    "FROM TBL_RESERVE "+
+                    "WHERE CUSTOM_ID = ? ";      
+        MovieReserveVo vo = new MovieReserveVo(0, null, null, null);     
+        try (   
+            Connection connection = getConnection();   
+            PreparedStatement pstmt = connection.prepareStatement(sql); 
+        ){
+            pstmt.setString(1, id);
+            ResultSet rs = pstmt.executeQuery(); 
+            
+            while(rs.next()){
+                vo = new MovieReserveVo(rs.getInt(1),
+                                                        rs.getString(2), 
+                                                        rs.getString(3), 
+                                                        rs.getDate(4));
+            }
+        } catch (SQLException e) {
+            System.out.println("checkId 실행 예외 발생 : "+ e.getMessage());
+        }
+        return vo;
+    }
+    
+    public int getUserAge(String custom_id){
+        int userAge = 0;
+        String sql = "SELECT AGE FROM TBL_VIEWER WHERE CUSTOM_ID = ?";
+        try (Connection connection = getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, custom_id);
+            try(ResultSet rs = ps.executeQuery()){
+                if (rs.next()) {
+                    userAge = rs.getInt("AGE");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("getUserAge ERROR : " + e.getMessage());
+        }
+        return userAge;
+    }
+
+    public int getAgeLimit(String movietitle){
+        int ageLimit = 0;
+        String sql = "SELECT VIEW_AGE FROM TBL_MOVIE WHERE TITLE = ?";
+        try (Connection connection = getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, movietitle);
+            try(ResultSet rs = ps.executeQuery()){
+                if (rs.next()) {
+                    ageLimit = rs.getInt("VIEW_AGE");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("getAgeLimit ERROR : " + e.getMessage());
+        }
+
+        return ageLimit;
+    }
+
+    public boolean checkAgeLimit(String custom_id, String movietitle){
+        int Limit = 19;
+
+        int userAge = getUserAge(custom_id);
+        int movieAge = getAgeLimit(movietitle);
+
+        return userAge < Limit && userAge < movieAge;
+        
+    }
+    
 }
 
   

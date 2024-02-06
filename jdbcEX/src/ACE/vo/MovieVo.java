@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode
+
 public class MovieVo {
     private String title;
     private String category;
@@ -17,7 +18,4 @@ public class MovieVo {
         return "[title=" + title + ", category=" + category + ", view_age=" + view_age + ", price=" + price
                 + "]";
     }
-
-
-     
 }
