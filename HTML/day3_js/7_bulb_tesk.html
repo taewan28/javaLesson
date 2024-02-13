@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+        <h2>에너지 절약을 합시다. : <span style="color: red;" id="bulb1"></span></h2>
+        <!-- img 태그로 그림을 화면에 표시합니다. 그림파일의 url 은 src 속성값으로 설정합니다. -->
+        <img src="../dibos_task/KakaoTalk_20240213_160833991.gif" alt="" id="bulb" style="cursor: pointer;" onclick="bulbOnOff()">
+        <div>
+        <button onclick="bulbOn()" id="on">켜줘</button>
+        <button onclick="bulbOff()" id="off">꺼줘</button>
+        </div>
+        <script>
+            const bulb = document.getElementById('bulb')
+            const bulb1 = document.getElementById('bulb1')
+
+            const on = document.getElementById('on')
+            const off = document.getElementById('off')
+            off.disabled = true
+
+            function bulbOnOff(){       //이미지 클릭해서 toggle 동작하기
+                if(bulb1.innerHTML== 'on')      //현재 on 이면
+                    bulbOff()       //클릭했을 때 off 하기
+                else 
+                    bulbOn()
+            }
+
+            function bulbOn(){
+                bulb.src="../dibos_task/KakaoTalk_20240213_160833779.gif"
+                on.disabled = true      
+                off.disabled = false  
+                bulb1.style.color = 'green';
+                bulb1.innerHTML = 'on';
+
+            }
+            function bulbOff(){
+                bulb.src="../dibos_task/KakaoTalk_20240213_160833991.gif"
+                off.disabled = true
+                on.disabled = false
+                bulb1.style.color = 'red';
+                bulb1.innerHTML = 'off';
+            }
+            //초기화는 원하는 대로
+            bulbOff()
+        </script>
+    
+</body>
+</html>
