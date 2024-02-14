@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <p>사용자가 물품을 주문합니다. 주문 '품목'과 '수량'을 입력합니다.</p>
+    <form action="success.html">
+        <input type="text" name="pcode" 
+                placeholder="상품코드 입력하세요">
+        <input type="number" name="quantity"
+                value="1" 
+                placeholder="주문수량을 입력하세요">
+        <button>주문</button>
+    </form>
+    <!-- 
+    http://127.0.0.1:3000/day2/day3_form/success.html?pcode=abc01&quantity=23
+
+        input 요소 name 이 pcode 는 사용자 입력값 abc01 이고(&)
+                           quantity 는            23 을 전송합니다.
+        위 2개의 입력값을 받는 서버의 주소는 ? 앞의 url 입니다.
+        ? 뒤에 입력값 정보를 query string(조회 문자열) 또는 입력 파라미터라고 함.
+     -->
+    
+</body>
+    <!-- 
+        jsp 에서는 form 태그의 method 속성값을 post (저장) 로 하면
+        사용자가 입력한 값이 url 에 안보입니다.
+        지금은 method 속성의 기본값 get(조회) 입니다.
+        결론 : form 주요 속성은 action, method 입니다.
+     -->
+</html>

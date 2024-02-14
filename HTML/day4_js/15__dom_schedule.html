@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>array_schedule</title>
+    <style>
+        table{width: 800px;}
+        /*테이블 크기 800픽셀에 대한 백분율로 너비를 설정합니다.*/
+        th{width: 13%; background-color: tomato;color: white;}
+        td{width: 10%;}
+        th,td{border: 1px solid tomato; padding: 7px 12px; text-align: center;}
+    </style>
+</head>
+<body>
+    <h3>오늘의 스케줄</h3>
+    <!-- 자바스크립트 배열에 저장된 값으로 시간표를 만들어 봅니다. -->
+    <table>
+        <tr>
+            <tr id="time"></tr>
+            <tr id="todo"></tr>
+        </tr>
+    </table>
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th>TIME</th>
+                <th>TODO</th>
+            </tr>
+        </thead>
+        <tbody id = 'vertical'>
+            <!-- tbody 의 자식으로 tr을 만들어서 append 하기. 그냥 순수 for문으로 배열 사용하기 -->
+        </tbody>
+    </table>
+
+    <script>
+        const time = ['09:00','11:00','12:30','14:00','16:45',]
+        const todo = ['수업','과제','점심식사','주간회의','자료조사',]
+
+        function makeVerricalTable(){
+            const tbody = document.getElementById('vertical')
+            //const tbody = document.querySelector('tbody')     //잘못된 위치에 테이블이 만들어집니다.
+            //tbody가 1개 일때만 사용 가능 - table 만들 때 tbody는 브라우저에서 자동으로 추가합니다.(주의)
+            for(let i = 0; i<time.length;i++){
+                const tr = document.createElement('tr')
+                ////////
+                let td = document.createElement('td')
+                td.innerHTML = time[i]
+                tr.appendChild(td)
+                /////
+                td = document.createElement('td')
+                td.innerHTML = todo[i]
+                tr.appendChild(td)
+                /////
+                tbody.appendChild(tr)
+            }
+        }
+        makeVerricalTable()
+
+        function makeTable(){
+            //dom 메소드 createElement, appendChild 이용해서 완성하세요.
+            //첫번쨰 행 제목 th 요소 생성해서 append
+            const timeRow = document.getElementById('time')
+            const todoRow = document.getElementById('todo')
+
+            let th = document.createElement('th')
+            th.innerHTML = 'TIME'
+            timeRow.appendChild(th)
+            time.forEach((value) =>{
+                const timenew = document.createElement('td')
+                timenew.innerHTML = value;
+                timeRow.appendChild(timenew)
+            })
+
+            th = document.createElement('th')
+            th.innerHTML = 'TODO'
+            todoRow.appendChild(th)
+            todo.forEach(function (value) {
+                const todonew = document.createElement('td')
+                todonew.innerHTML = value;
+                todoRow.appendChild(todonew)
+            })
+        }
+        makeTable();
+        
+    </script>
+</body>
+</html>
