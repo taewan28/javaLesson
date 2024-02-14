@@ -1,7 +1,5 @@
 package ACE.vo;
 
-import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -9,18 +7,17 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode
+
 public class MovieViewVo {
-    private int res_idx ;
-	private String title;		
-	private int price;
-	private Date res_date;
-
-
-
+private String viewerId;
+    private String name;
+    private int age;
+    private String password;
+    
     @Override
     public String toString() {
-        return "ViewerReserveVo [res_idx=" + res_idx + ", title=" + title + ", price=" + price + ", res_date="
-                + res_date + "]";
+        return String.format("%6d %15s %40s\t %8d %15d %40s" ,viewerId,name,age);
     }
-    
+
+
 }

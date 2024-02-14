@@ -3,10 +3,8 @@ package ACE.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import ACE.vo.MovieReserveVo;
 
 
 public class Viewerdao {
@@ -37,27 +35,27 @@ public class Viewerdao {
         return result;
     }
 
-    public MovieReserveVo selAll(String id){
-        String sql = "SELECT * \r\n" + 
-                    "FROM TBL_RESERVE "+
-                    "WHERE CUSTOM_ID = ? ";      
-        MovieReserveVo vo = new MovieReserveVo(0, null, null, null);     
+    public int checkpasswd(String viewerid,String viewerpasswd){
+        String sql = "SELECT CUSTOM_ID,PASSWORD \r\n" + 
+                "FROM TBL_VIEWER tv\r\n" + 
+                "WHERE CUSTOM_ID = ? AND PASSWORD = ?";
+        int result=0;
         try (   
             Connection connection = getConnection();   
             PreparedStatement pstmt = connection.prepareStatement(sql); 
         ){
-            pstmt.setString(1, id);
-            ResultSet rs = pstmt.executeQuery(); 
-            
-            while(rs.next()){
-                vo = new MovieReserveVo(rs.getInt(1),
-                                                        rs.getString(2), 
-                                                        rs.getString(3), 
-                                                        rs.getDate(4));
-            }
+
+            pstmt.setString(1, viewerid);
+            pstmt.setString(2, viewerpasswd);
+            result=pstmt.executeUpdate();  
+                
         } catch (SQLException e) {
-            System.out.println("checkId 실행 예외 발생 : "+ e.getMessage());
+            System.out.println("checkID 및 checkPASSWORD 실행 예외 발생 : "+ e.getMessage());
         }
-        return vo;
-    }   
+        return result;
+    }
 }
+
+
+
+

@@ -28,11 +28,13 @@ CREATE TABLE tbl_reserve(
 
 CREATE SEQUENCE res_pk_seq START WITH 101;
 
-INSERT INTO tbl_viewer VALUES ('mond', '이광원', 17);
-INSERT INTO tbl_viewer VALUES ('abcd', '김태완', 14);
-INSERT INTO TBL_VIEWER VALUES('xodbs', '권태윤', 25);
-INSERT INTO TBL_VIEWER VALUES ('chane', '강주찬', 19);
-INSERT INTO tbl_viewer VALUES ('app1e','고길현',17);
+ALTER TABLE TBL_VIEWER ADD password varchar2(20);
+
+INSERT INTO tbl_viewer VALUES ('mond', '이광원', 17,);
+INSERT INTO tbl_viewer VALUES ('abcd', '김태완', 14,);
+INSERT INTO TBL_VIEWER VALUES('xodbs', '권태윤', 25,);
+INSERT INTO TBL_VIEWER VALUES ('chane', '강주찬', 19,);
+INSERT INTO tbl_viewer VALUES ('app1e','고길현',17,);
 
 INSERT INTO tbl_movie VALUES ('대충액션영화제목', '액션', 15, 15000);
 INSERT INTO tbl_movie VALUES ('대충야한영화제목', '로맨스', 19, 20000);
@@ -60,27 +62,8 @@ VALUES (res_pk_seq.nextval, 'app1e', '더 넌', to_date('2024-01-16 15:32:41', '
 
 
 
-
-SELECT  
-FROM TBL_RESERVE tr 
-JOIN TBL_VIEWER tv 
-ON tr.CUSTOM_ID  = tv.CUSTOM_ID  
-WHERE tv.name LIKE '%태완%';
-
-SELECT * 
-FROM TBL_MOVIE;
-
-SELECT TITLE ,CATEGORY ,VIEW_AGE ,PRICE
-FROM TBL_VIEWER tv 
-IN (SELECT VIEW_AGE
-	FROM TBL_MOVIE tm
-	WHERE 
-	
-	)
-	
-
-
-WHERE 
-
+SELECT PASSWORD
+FROM TBL_VIEWER tv
+WHERE PASSWORD = '123';
 
 

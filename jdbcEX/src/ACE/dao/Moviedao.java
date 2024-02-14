@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ACE.vo.MovieReserveVo;
-import ACE.vo.MovieViewVo;
 import ACE.vo.MovieVo;
 import jdbc.day1.OracleConnectionUtil;
 
