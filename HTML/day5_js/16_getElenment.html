@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr class="twice">
+            <td>사나</td>
+        </tr>
+
+        <tr class="twice">
+            <td>모모</td>
+        </tr>
+
+        <tr class="twice">
+            <td>다현</td>
+        </tr>
+
+        <tr class="twice">
+            <td>나연</td>
+        </tr>
+
+        <tr class="twice">
+            <td>쯔위</td>
+        </tr>
+        <tr>
+            <td>MOMO</td>
+        </tr>
+    </table>
+    <script>
+        //getElementsByTagName 리턴 타입 - HTMLCollection :forEach
+        const twice1 = document.getElementsByTagName('tr')
+        //querySelectorAll 리턴 타입 - NodeList : forEach 사용 가능합니다.
+        const twice2 = document.querySelectorAll('tr')
+        const twice3 = document.querySelectorAll('.twice')
+        //getElementsByClassName 리턴 타입 - HTMLAllCollection : forEach 사용 안됨
+        const twice4 = document.getElementsByClassName('twice')
+        console.log(twice1)
+        console.log(twice2)
+        console.log(twice3)
+
+        twice3.forEach(element => {
+            console.log('가져온 요소 = ', element)
+        })
+
+        /* 오류 : HTMLCollection 은 forEach 쓸 수 없다.
+            twice1.forEach(element => {
+            console.log('가져온 요소 = ', element)
+        }) */
+
+    </script>
+    
+</body>
+</html>
