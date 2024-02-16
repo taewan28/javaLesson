@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h3>자바스크립트의 Date 객체</h3>
+    <hr>
+    <pre style="font-size: 1rem;font-family: inherit;">
+        <script>
+            document.writeln('<h4> 현재날짜와 시간</h4>')
+            console.log(new Date())
+            document.writeln(new Date())
+            //Locale :  국가/언어 와 관련된 정보 en-US, ko-KR 로 설정하기도 합니다.
+            //          운영체제에 설정된 현지 시간을 현지 형식에 맞게 출력.
+            document.writeln('toLocaleString = ', new Date().toLocaleString())
+            // locale 에 따라 출력 형식 다릅니다.   03/10/2025
+            document.writeln('toLocaleDateString en-US =', 
+                new Date().toLocaleDateString('en-US', {
+                    year:"numeric", month:"2-digit", day:"2-digit"
+                })    
+            )
+
+            document.writeln('toLocaleDateString ko-KR =', 
+                new Date().toLocaleDateString('ko-KR', {
+                    year:"numeric", month:"2-digit", day:"2-digit"
+                })    
+            )
+
+            document.writeln('toLocaleDateString zh-CN =', 
+                new Date().toLocaleDateString('zh-CN', {
+                    year:"numeric", month:"2-digit", day:"2-digit"
+                })    
+            )
+
+            document.writeln('<h4> 표준시간 출력</h4>')
+            document.writeln('toUTCString(협정 세계시) = ', new Date().toUTCString())
+            document.writeln('toUTCString(국제표준 ISO형식) = ', new Date().toISOString())
+            
+            document.writeln('<h4>1970년 1월1일 기준 long</h4>')
+            document.writeln(new Date().getTime())
+
+            document.writeln('<h4>날짜 및 시간 GET 메소드</h4>')
+            document.writeln('년도 = ', new Date().getFullYear())
+            document.writeln('월 = ', new Date().getMonth()+1)      //월은 0 ~ 11 범위
+            document.writeln('일 = ', new Date().getDate())
+            document.writeln('시 = ', new Date().getHours())
+            document.writeln('분 = ', new Date().getMinutes())
+            document.writeln('초 = ', new Date().getSeconds())
+            document.writeln('요일 = ', new Date().getDay())        //요일 0~6. 0이 일요일
+
+            document.writeln('<h4>날짜 및 시간 SET 메소드</h4>')
+            let today = new Date();
+            //setXXX 메소드로 today 에 저장된 날짜를 변경하기
+            today.setFullYear(today.getFullYear()+3)
+            document.writeln('getFullYear()+3=', today)
+            today.setMonth(today.getMonth()+2)
+            today.setDate(today.getDate()+10)
+
+
+            document.writeln('getFullYear()+3=', today)
+            //여러 메소드를 확인 테스트 해보세요.
+            document.writeln('변경된 today=',today)
+
+            let mybirth = new Date('2002-11-03')
+            document.writeln('mybirth = ', mybirth)
+            mybirth.setFullYear(mybirth.getFullYear()+3)
+            today.setMonth(today.getMonth()+2)
+            today.setDate(today.getDate()+10)
+            document.writeln('변경된 mybirth=',mybirth)
+
+            document.writeln('<h4></h4>')
+            document.writeln('<h4></h4>')
+            document.writeln('<h4></h4>')
+        </script>
+    </pre>
+    
+</body>
+</html>

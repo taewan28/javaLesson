@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h3>날짜 형식을 다루는 input예시</h3>
+    <hr>
+    <form action="">
+        <label for="night">숙박일수</label>
+        <select name="days" id="night">
+            <option value="0">선택</option>
+            <option value="1">1박</option>
+            <option value="2">2박</option>
+            <option value="3">3박</option>
+            <option value="4">4박</option>
+        </select><br>
+        <label for="enterDate">입실 날짜 :</label>
+        <input type="date" name="start" id="enterDate"><br>
+        <label for="outerDate">퇴실 날짜 :</label>
+        <input type="date" name="end" id="outerDate" disabled><br>
+    </form>
+
+    <script>
+        //18,19번 예제는 입력요소 가져올 때 querySelector 사용 : 선택자 연습
+        //form 은 document 의 하위객체. 여러 form 을 가질 수 있으므로 배열 forms 이용하여 입력 요소값 가져올 수 있음
+        const night = document.forms[0].days        //name 속성값 사용
+        const start = document.forms[0].start
+        const end = document.forms[0].end
+
+        //입실 날짜를 오늘 날짜로 하기 => new Date() 조작할 예정.
+        // type=date 요소의 value 는 yyyy-mm-dd 패턴입니다.
+        //start.value = '2024-02-16'
+
+        //날짜를 전달하면 yyyy-mm-dd 패턴의 문자열로 리턴해 주는 함수
+        function dateFormat(vdate){
+            const year = vdate.getFullYear()
+            //문자열을 무조건 2개 문자로 합니다. 부족하면 앞에 0으로 채우기
+            const month = (vdate.getMonth() + 1).toString().padStart(2,'0')
+            const day = vdate.getDate().toString().padStart(2,'0')
+
+            //[year,month,day] 배열 값을 기호 - 로 연결
+            console.log([year,month,day].join('-'))
+            return [year,month,day].join('-')
+        }
+
+        start.value = dateFormat(new Date())
+
+        //이벤트 리스너(핸들러)
+        document.getElementById('night').addEventListener('change',function(){
+            console.log('선택 숙박일 =', night.value)
+            //1) 입실날짜 문자열 가져오기 ->Date로 바꾸기.
+            // 숙박일수 값 가져오기 -> 입실날짜에 더하여 퇴실 날짜 구하기(setXXXX메소드)
+            // 퇴식날짜에 문자열로 value 설정하기
+            let t = new Date(start.value)
+            t.setDate(t.getDate()+Number(night.value))
+            end.value = dateFormat(t)
+        })
+
+
+        document.getElementById('enterDate').addEventListener('change',function(){
+            console.log('선택 입실날짜=', start.value)
+            let t = new Date(start.value)
+            t.setDate(t.getDate()+Number(night.value))
+            end.value = dateFormat(t)
+        })
+
+    </script>
+</body>
+</html>

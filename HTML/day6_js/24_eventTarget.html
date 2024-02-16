@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 5rem;
+            height: 5rem;
+            background-color: cadetblue;
+            box-shadow: inset -25px -25px 40px rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        li{
+            list-style: none;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color: antiquewhite;width: 500px;height: 500px;" id="container">
+        <ul style="width: 50%;background-color: azure;">
+            <li><span>a</span></li>
+            <li><span>b</span></li>
+            <li><span>c</span></li>
+            <li><span>d</span></li>
+            <li><span>e</span></li>
+        </ul>
+    </div>
+    <!-- span 클릭하면 alert 띄우고 싶다면...
+        기존방법1) span 요소에 click 이벤트 핸들러를 작성합니다.=> 단 , span 5개 모두에게 동일한 작업을 해야합니다.
+        방법2) dom 구조인 html 문서는 이벤트를 부모 자식끼리 전파를 합니다. 이것을 이용해 봅시다.
+    -->
+    <script>
+        //콜백 함수의 인자 e는 이벤트를 발생시킨 정보를 포함합니다.
+        document.getElementById('container').addEventListener('click',function(e){
+            console.log(e)
+            console.log('e.target.tagName=',e.target.tagName)
+            if(e.target.tagName ==='SPAN'){
+                alert(`선택한 공은 ${e.target.innerHTML} 입니다.`)
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #container {
+            width: 920px;
+            height: 520px;
+            padding: 10px;
+            margin: 10px;
+            float: left;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .item-list {
+            display: grid;
+            align-items: flex-start;
+        }
+
+        .item-list.row-4 {
+            grid-template-rows: repeat(4, 1fr);
+            row-gap: 1.5rem;
+        }
+
+        .item-list.col-6 {
+            grid-template-columns: repeat(8, 1fr);
+            column-gap: 1.5rem;
+        }
+
+        .circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .green {
+            background-color: rgb(69, 179, 157);
+            /* box-shadow: inset 5px 5px 10px 5px rgb(19, 141, 117) ; */
+            box-shadow: inset -25px -25px 40px rgba(0, 0, 0, .5);
+            background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 220, .3) 0%, transparent 100%);
+        }
+
+        .orange {
+            background-color: rgb(240, 128, 128);
+            /* box-shadow: inset 5px 5px 10px 5px rgb(205, 92, 92); */
+            box-shadow: inset -25px -25px 40px rgba(0, 0, 0, .5);
+            background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 220, .3) 0%, transparent 100%);
+
+        }
+
+        h3 {
+            text-align: center;
+            width: 100%;
+        }
+
+        span {
+            cursor: pointer;
+        }
+
+        table {
+            width: 500px;
+            margin-right: 50px;
+            float: right;
+        }
+
+        th,
+        td {
+            border: 1px solid gray;
+            text-align: center;
+        }
+
+        th {
+            background-color: lightsteelblue;
+            color: brown;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="container">
+        <h3>👽</h3>
+        <hr>
+        <h3>앞</h3>
+        <ul class="item-list col-6 row-4">
+
+
+        </ul>
+        <h3>뒤</h3>
+        <hr>
+    </div>
+    <table>
+        <tr>
+            <th>이름</th>
+            <th>코드</th>
+            <th>번호</th>
+        </tr>
+        <tbody>
+            <tr>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        const ul = document.querySelector('ul')
+        let count = 0;
+        const xnum = [7, 15, 24, 28, 29, 30, 31]
+        for (let i = 0; i < 32; i++) {
+            const li = document.createElement('li')
+            const span = document.createElement('span')
+            // li.id = i
+            if (i % 8 > 3) {
+                span.className = 'circle green'
+            } else {
+                span.className = 'circle orange'
+            }
+            if (xnum.includes(i)) {
+                span.innerHTML = ''
+            } else {
+                span.innerHTML = String.fromCharCode(65 + count)
+                span.id = String.fromCharCode(65 + count++)
+            }
+            li.appendChild(span)
+            ul.appendChild(li)
+        }
+
+        const rands = []
+        for (let i = 0; i < 26; i++) {
+            rands.push(i)
+        }
+
+
+        document.querySelectorAll('li').forEach((li, index) => {
+            if (!xnum.includes(index)) {
+                const data = getRandomInt(1, rands.length - 1)
+                li.id = data
+
+            }
+        })
+
+        function getRandomInt(min, max) {
+            const idx = Math.floor(Math.random() * (max - min + 1)) + min;
+            const data = rands[idx]
+            rands.splice(idx, 1)
+            return data
+        }
+
+        // ['A', 'B', 'C', 'D'].forEach(value => {
+        //     for (let i = 0; i < 6; i++) {
+
+
+        //     }
+        // })
+        const names = [
+            '강주찬',
+            '고길현',
+            '권태윤',
+            '김승한',
+            '김태완',
+            '노희영',
+            '민찬희',
+            '이광원',
+            '이대환',
+            '이예진',
+            '이재훈',
+            '임채은',
+            '임현범',
+            '장성우',
+            '전예진',
+            '정재원',
+            '조이루',
+            '조지수',
+            '조하연',
+            '차정호',
+            '한주영',
+            '한진만',
+            '황병훈'
+        ]
+
+        rands.splice(0, rands.length)
+        for (let i = 0; i < 26; i++) {
+            rands.push(i)
+        }
+
+        names.forEach((name, index) => {
+            const tr = document.createElement('tr')
+            const td1 = document.createElement('td')
+            const td2 = document.createElement('td')
+            const td3 = document.createElement('td')
+            td1.innerHTML = name
+            let code = getRandomInt(1, rands.length - 1)           //String.fromCharCode(65 + getRandomInt(0, rands.length-2))    
+            td2.innerHTML = code
+            tr.id = 'r' + code
+            // td3.innerHTML = ''
+            tr.appendChild(td1)
+            tr.appendChild(td2)
+            tr.appendChild(td3)
+            document.querySelector('tbody').appendChild(tr)
+        })
+
+
+        document.getElementById('container').addEventListener('click', e => {
+            if (e.target.tagName === 'SPAN' && document.querySelector('tr#r' + e.target.parentNode.id) != null) {
+                console.log(e.target.parentNode.id)
+
+                e.target.innerHTML = document.querySelector('tr#r' + e.target.parentNode.id + '>td:first-child').innerHTML// e.target.innerHTML+':'+e.target.parentNode.id
+                // console.log( document.querySelector('tr#r'+e.target.parentNode.id))
+                document.querySelector('tr#r' + e.target.parentNode.id + '>td:last-child').innerHTML = e.target.id
+                e.target.style.fontSize = '1.2rem'
+            }
+        })
+    </script>
+</body>
+
+</html>

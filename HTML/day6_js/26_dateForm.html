@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h3>날짜 형식을 다루는 input예시</h3>
+    <hr>
+    <form action="">
+        <label for="night">숙박일수</label>
+        <select name="days" id="night">
+            <option value="0">선택</option>
+            <option value="1">1박</option>
+            <option value="2">2박</option>
+            <option value="3">3박</option>
+            <option value="4">4박</option>
+        </select><br>
+        <label for="enterDate">입실 날짜 :</label>
+        <input type="date" name="start" id="enterDate"><br>
+        <label for="outerDate">퇴실 날짜 :</label>
+        <input type="date" name="end" id="outerDate" disabled><br>
+    </form>
+
+    <script>
+        //18,19번 예제는 입력요소 가져올 때 querySelector 사용 : 선택자 연습
+        //form 은 document 의 하위객체. 여러 form 을 가질 수 있으므로 배열 forms 이용하여 입력 요소값 가져올 수 있음
+        const night = document.forms[0].days        //name 속성값 사용
+        const start = document.forms[0].start
+        const end = document.forms[0].end
+
+        //입실 날짜를 오늘 날짜로 하기 => new Date() 조작할 예정.
+        // type=date 요소의 value 는 yyyy-mm-dd 패턴입니다.
+        //start.value = '2024-02-16'
+
+        //날짜를 전달하면 yyyy-mm-dd 패턴의 문자열로 리턴해 주는 함수
+        function dateFormat(vdate){
+            const year = vdate.getFullYear()
+            //문자열을 무조건 2개 문자로 합니다. 부족하면 앞에 0으로 채우기
+            const month = (vdate.getMonth() + 1).toString().padStart(2,'0')
+            const day = vdate.getDate().toString().padStart(2,'0')
+
+            //[year,month,day] 배열 값을 기호 - 로 연결
+            console.log([year,month,day].join('-'))
+            return [year,month,day].join('-')
+        }
+
+        start.value = dateFormat(new Date())
+
+        //이벤트 리스너(핸들러)
+        //1) 입실날짜 문자열 가져오기 ->Date로 바꾸기.
+        // 숙박일수 값 가져오기 -> 입실날짜에 더하여 퇴실 날짜 구하기(setXXXX메소드)
+        // 퇴식날짜에 문자열로 value 설정하기
+
+        //1) 숙박일수 선택했을 떄
+        document.getElementById('night').addEventListener('change',changeEndDate)
+        
+        //콜백함수 이름을 인자로 전달할 때에는 () 안씁니다. ()는 호출 형식. 함수 이름(식별자) 전달
+        //1) 입실날짜 선택했을 떄
+        document.getElementById('enterDate').addEventListener('change',changeEndDate)
+        
+        //1) 2)는 같은 실행 코드 => 퇴실날짜 구하기
+        function changeEndDate(){
+            console.log('선택 입실날짜=', start.value)
+            console.log('선택 숙박일수=', start.value)
+            let end_date = new Date(start.value)
+            end_date.setDate(end_date.getDate()+Number(night.value))
+
+            //퇴실날짜 input은 전역 변수 end 로 선언했습니다.
+            end.value = dateFormat(end_date)
+
+        }
+
+        //입실날짜 요소의 min, max 속성으로 값의 제한을 설정해 봅니다.
+        //요구사항 : min 은 오늘 날짜
+        //          max 는 3개월
+        function initStart(){
+            let today = new Date()
+            start.value = dateFormat(today)
+            start.min = start.value             //오늘 이전 날짜는 비활성화
+            today.setMonth(today.getMonth()+3)
+            start.max = dateFormat(today)       //오늘 이후 3개월까지의 값
+        }
+
+    </script>
+</body>
+</html>

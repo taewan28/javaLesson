@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h3>이벤트 핸들러 메소드 addEventListener</h3>
+    <hr>
+    <!-- 이벤트 처리 방법1 -->
+    <button onclick="hello()">HELLO</button>
+
+    <!-- 이벤트 처리 방법2 -->
+    <button id="hi">하이</button>
+    <hr>
+    <input type="text" id="message" placeholder="메시지를 작성하세요">
+
+    <pre style="font-size: 1rem;font-family: initial;">
+        <script>
+            //change : 요소의 값이 변경될 때 발생하는 이벤트입니다. input에서는 내용이 바뀌는 이벤트
+            //click  : 마우스 input 을 클릭하면 발생하는 이벤트
+            document.getElementById('message').addEventListener('change',()=>{
+                const msg = document.getElementById('message')
+                console.log(msg.value)
+            })
+
+            //keyup,keydown
+            document.getElementById('message').addEventListener('keydown',()=>{
+                const msg = document.getElementById('message')
+                console.log(msg.value)
+            })
+
+
+            function hello(){
+                alert('hello')
+                console.log('클릭 이벤트에 대한 함수입니다.button 태그에 hello()함수 호출 명령이 있습니다.')
+            }
+
+            document.getElementById('hi').addEventListener('click',
+                        function(){
+                            alert('하이')
+                            console.log('button 태그에 자바스크립트 코드를 작성하지 않고 이벤트 처리합니다.')
+                        }
+            
+            )
+        </script>
+    </pre>
+</body>
+</html>
