@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <style>
+        body{
+            background-color: bisque;
+            padding: 7px 14px 0px 14px;
+            margin-top: 10px;
+        }
+
+        li{
+            list-style: none;
+            margin-left: 34%;
+        }
+
+        h4{
+            list-style: none;
+            margin-left: 34%;
+            margin-bottom: 0%;
+        }
+
+        h2{
+            margin-left: 36%;
+            font-family: 5rem;
+        }
+        h1{
+            margin-left: 48%;
+            font-family: 5rem;
+        }
+
+        input[type=text], input[type=number]{
+            width: 400px;
+            padding: 14px 21px;
+        }
+
+        button{
+            margin-left: 36%;
+            width: 400px;
+            padding: 7px 14px;
+            margin-top: 1rem;
+            background-color: white;
+            cursor: pointer;
+            
+        }
+   
+    </style>
+</head>
+<body>
+    <h1>회원가입</h1>
+    <h2>회원이 되어 다양한 혜택을 경험해 보세요</h4>
+    <form action="success.html" onsubmit="return save()">
+        <ul>
+            <h4>아이디</h4>
+            <div>
+                <li>
+                    <input type="text" name="name" id="" value="" placeholder="아이디을 입력하세요"required>
+                </li>
+            </div>
+            <h4>비밀번호</h4>
+            <li>
+                <input type="text" password="password" id=""value="" placeholder="비밀번호를 입력해주세요">
+            </li>
+            <h4>비밀번호 재확인</h4>
+            <li>
+                <input type="text" password2="" id=""value="" placeholder="비밀번호 확인해 주세요">
+            </li>
+            <h4>이름</h4>
+            <li>
+                <input type="text" id="" value="" placeholder="이름을 입력하세요">
+            </li>
+            <h4>전화번호</h4>
+            <li>
+                <input type="number" id="" value="" placeholder="전화번호를 입력하세요">
+            </li>
+            <h4>이메일 주소</h4>
+            <li>
+                <input type="text" id="" value="" placeholder="이메일 주소">
+            </li>
+            <button type="button" onclick="save()">가입하기</button>
+        </ul>
+    </form>
+    <script>
+
+        function save() {
+            const id = document.querySelector('input[name="name"]')
+            const password = document.querySelector('input[password="password"]')
+
+
+            let regex = /^[a-zA-Z가-힣]{2,5}$/
+            
+            /* if(myform.id.value.length == 0){ // myform.id.value == "" 이것도 가능
+	        alert("아이디가 누락됐습니다.");
+	        myform.id.focus(); // 포커스를 이동시켜 바로 아이디를 입력할 수 있게
+	        return false;
+            } */
+
+            let isValid = true              
+            if (id.value == '') {
+                alert('아이디를 입력하세요')
+                id.focus()
+                isValid = false 
+
+            }else if(!regex.test(id.value)){
+                alert('이름에 기호나 숫자가 포함되어 있습니다.')
+                id.focus()
+                isValid = false
+
+            }else if (password.value == '') {
+                alert('패스워드를 입력하세요')
+                password.focus()
+                isValid = false 
+
+            }else if(regex.test(password.value)){
+                alert('이름에 기호나 숫자가 포함되어 있지 않습니다.')
+                password.focus()
+                isValid = false
+                
+            }else if (age.value == '') {
+                alert('나이를 입력하세요')
+                age.focus()
+                isValid = false 
+            } else if (age.value < 20 || age.value > 100) {
+                alert('나이 유효값이 아닙니다.')
+                age.focus()
+                isValid = false 
+            }else 
+
+                if (hobbies.length == 0) {
+                    alert('취미를 제발 하나만 선택해주세요.!!')
+                    console.log('테스트', temp[0])
+                    document.getElementById('swimming').focus()
+                    isValid = false 
+            }       //if 끝
+
+            if(isValid){
+            const hobbArr = []
+            hobbies.forEach(ele => {
+                // console.log(ele.value)
+                hobbArr.push(ele.value)
+                console.log(hobbArr)
+            })
+            alert(`${name.value}님(${age.value}) 선택한 취미는 ${hobbArr.join(',')} 입니다.`)
+            alert('입력 데이터 저장완료!!')
+
+                //*직접 submit 동작 메소드 실행시키기*
+                document.forms[0].submit();
+            }
+        }
+
+
+    </script>
+    
+    
+</body>
+</html>

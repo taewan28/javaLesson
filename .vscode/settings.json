@@ -6,5 +6,6 @@
         "d:\\Class231228\\설치프로그램\\lombok.jar",
         "d:\\Class231228\\설치프로그램\\ojdbc11.jar"
     ],
-    "liveServer.settings.NoBrowser": false
+    "liveServer.settings.NoBrowser": false,
+    "liveServer.settings.port": 5501
 }
