@@ -55,7 +55,7 @@
             <h4>아이디</h4>
             <div>
                 <li>
-                    <input type="text" name="name" id="" value="" placeholder="아이디을 입력하세요"required>
+                    <input type="text" name="name" id="id" value="" placeholder="아이디을 입력하세요"required>
                 </li>
             </div>
             <h4>비밀번호</h4>
@@ -86,7 +86,7 @@
         function save() {
             const id = document.querySelector('input[name="name"]')
             const password = document.querySelector('input[password="password"]')
-
+            
 
             let regex = /^[a-zA-Z가-힣]{2,5}$/
             
@@ -102,9 +102,9 @@
                 id.focus()
                 isValid = false 
 
-            }else if(!regex.test(id.value)){
-                alert('이름에 기호나 숫자가 포함되어 있습니다.')
-                id.focus()
+            }else if(myform.id.value.length == 0){
+                alert("아이디가 누락됐습니다.");
+                myform.id.focus()
                 isValid = false
 
             }else if (password.value == '') {
@@ -113,7 +113,7 @@
                 isValid = false 
 
             }else if(regex.test(password.value)){
-                alert('이름에 기호나 숫자가 포함되어 있지 않습니다.')
+                alert('패스워드에 기호나 숫자가 포함되어 있지 않습니다.')
                 password.focus()
                 isValid = false
                 
@@ -125,9 +125,7 @@
                 alert('나이 유효값이 아닙니다.')
                 age.focus()
                 isValid = false 
-            }else 
-
-                if (hobbies.length == 0) {
+            }else if (hobbies.length == 0) {
                     alert('취미를 제발 하나만 선택해주세요.!!')
                     console.log('테스트', temp[0])
                     document.getElementById('swimming').focus()
@@ -151,7 +149,12 @@
 
 
     </script>
-    
-    
 </body>
 </html>
+
+<!-- /* 블록요소의 텍스트 컨텐츠를 중앙에 오도록합니다. */
+            display: flex;
+            /* 수직 방향 중앙 */
+            align-items: center;
+            /* 수평 방향 중앙 */
+            justify-content: center; -->
